@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+import "grpc/Status.proto";
+
+package caterpillar.kvaka.grpc;
+
+//option java_package = "caterpillar.kvaka.grpc_proto";
+option java_multiple_files = true;
+
+message LinkTable {
+  int32 record_id = 1;
+  int32 inventor_id = 2;
+  int32 invention_id = 3;
+  Status status = 4;
+}
+
+message CreateLinkRecordRequest{
+  LinkTable link = 1;
+}
+
+message CreateLinkRecordResponse{
+  LinkTable link = 1;
+}
+
+message ReadLinkRecordRequest{
+  int32 record_id = 1;
+}
+
+message ReadLinkRecordResponse{
+  LinkTable linkTable = 1;
+}
+
+message UpdateLinkRecordRequest{
+  LinkTable link = 1;
+}
+
+message UpdateLinkRecordResponse{
+  LinkTable link = 1;
+}
+
+message DeleteLinkRecordRequest{
+  int32 record_id = 1;
+}
+
+message DeleteLinkRecordResponse{
+  bool success = 1;
+}
+
+message GetAllLinkedRecordsRequest{
+
+}
+
+message GetAllLinkedRecordsResponse{
+  repeated LinkTable link = 1;
+}
+
+service LinkTableService {
+  rpc CreateLink (CreateLinkRecordRequest) returns (CreateLinkRecordResponse) {}
+  rpc ReadLink (ReadLinkRecordRequest) returns (ReadLinkRecordResponse) {}
+  rpc UpdateLink (UpdateLinkRecordRequest) returns (UpdateLinkRecordResponse) {}
+  rpc DeleteLink (DeleteLinkRecordRequest) returns (DeleteLinkRecordResponse) {}
+  rpc GetAllRecords (GetAllLinkedRecordsRequest) returns (GetAllLinkedRecordsResponse) {}
+}

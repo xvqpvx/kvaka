@@ -1,0 +1,48 @@
+type Inventor {
+    inventor_id: ID!,
+    lastname: String,
+    firstname: String
+    status: Status
+}
+
+type Invention {
+    invention_id: ID!,
+    invention: String
+    status: Status
+}
+
+type InventorsInventions {
+    inventor: Inventor!
+    invention: Invention!
+    status: Status
+}
+
+enum Status{
+    ACTIVE,
+    NOT_ACTIVE
+}
+
+type InventorsInventionsConnection {
+    edges: [InventorsInventionsEdge!]! # список элементов
+    pageInfo: PageInfo! # информация о странице
+}
+
+type InventorsInventionsEdge {
+    node: InventorsInventions! # элемент списка
+    cursor: String! # курсор для пагинации
+}
+
+type PageInfo {
+    startCursor: String # начальный курсор для пагинации
+    endCursor: String # конечный курсор для пагинации
+    hasNextPage: Boolean! # есть ли еще страницы
+    hasPreviousPage: Boolean! # есть ли предыдущие страницы
+}
+
+type Query {
+    inventorsInventions(
+        first: Int, # количество записей, которое нужно получить
+        after: String, # курсор для пагинации
+        orderBy: String # поле для сортировки
+    ): InventorsInventionsConnection! # тип возвращаемого объекта
+}

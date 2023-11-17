@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package caterpillar.kvaka.grpc;
+
+option java_multiple_files = true;
+
+enum Status {
+  ACTIVE = 0;
+  NOT_ACTIVE = 1;
+}

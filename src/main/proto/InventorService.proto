@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+import "grpc/Status.proto";
+
+package caterpillar.kvaka.grpc;
+
+//option java_package = "caterpillar.kvaka.grpc_proto";
+option java_multiple_files = true;
+
+message Inventor {
+  int32 inventor_id = 1;
+  string lastname = 2;
+  string firstname = 3;
+  Status status = 4;
+}
+
+message CreateInventorRequest {
+  Inventor inventor = 1;
+}
+
+message CreateInventorResponse {
+  Inventor inventor = 1;
+}
+
+message ReadInventorRequest {
+  int32 inventor_id = 1;
+}
+
+message ReadInventorResponse {
+  Inventor inventor = 1;
+}
+
+message UpdateInventorRequest {
+  Inventor inventor = 1;
+}
+
+message UpdateInventorResponse {
+  Inventor inventor = 1;
+}
+
+message DeleteInventorRequest {
+  int32 inventors_id = 1;
+}
+
+message DeleteInventorResponse {
+  bool success = 1;
+}
+
+message GetAllInventorsRequest {}
+
+message GetAllInventorsResponse{
+  repeated Inventor inventor = 1;
+}
+
+service InventorService {
+  rpc CreateInventor (CreateInventorRequest) returns (CreateInventorResponse) {}
+  rpc ReadInventor (ReadInventorRequest) returns (ReadInventorResponse) {}
+  rpc UpdateInventor (UpdateInventorRequest) returns (UpdateInventorResponse) {}
+  rpc DeleteInventor (DeleteInventorRequest) returns (DeleteInventorResponse) {}
+  rpc GetAllInventors (GetAllInventorsRequest) returns (GetAllInventorsResponse) {}
+}

@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+import "grpc/Status.proto";
+
+package caterpillar.kvaka.grpc;
+
+option java_multiple_files = true;
+
+message Invention {
+  int32 invention_id = 1;
+  string invention = 2;
+  Status status = 3;
+}
+
+message CreateInventionRequest {
+  Invention invention = 1;
+}
+
+message CreateInventionResponse {
+  Invention invention = 1;
+}
+
+message ReadInventionRequest {
+  int32 invention_id = 1;
+}
+
+message ReadInventionResponse {
+  Invention invention = 1;
+}
+
+message UpdateInventionRequest {
+  Invention invention = 1;
+}
+
+message UpdateInventionResponse {
+  Invention invention = 1;
+}
+
+message DeleteInventionRequest {
+  int32 invention_id = 1;
+}
+
+message DeleteInventionResponse {
+  bool success = 1;
+}
+
+message GetAllInventionsRequest {}
+
+message GetAllInventionsResponse{
+  repeated Invention invention = 1;
+}
+
+service InventionService {
+  rpc CreateInvention (CreateInventionRequest) returns (CreateInventionResponse) {}
+  rpc ReadInvention (ReadInventionRequest) returns (ReadInventionResponse) {}
+  rpc UpdateInvention (UpdateInventionRequest) returns (UpdateInventionResponse) {}
+  rpc DeleteInvention (DeleteInventionRequest) returns (DeleteInventionResponse) {}
+  rpc GetAllInventions (GetAllInventionsRequest) returns (GetAllInventionsResponse) {}
+}
